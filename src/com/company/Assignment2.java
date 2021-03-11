@@ -10,55 +10,56 @@ public class Assignment2 {
     }
 
     public static void Stack() {
-        Stack<String> Palindrome = new Stack<>();
-        Palindrome.push("Mom");
-        Palindrome.push("Was it a car or a cat I saw?");
-        Palindrome.push("Madam, in Eden, I’m Adam.");
-        Palindrome.push("Yo, banana boy!");
-        Palindrome.push("Check if Palindrome loop is working.");
+        String testSentence = "Mom";
+//        String testSentence = "Was it a car or a cat I saw?";
+//        String testSentence = ("Madam, in Eden, I’m Adam.");
+//        String testSentence = "Yo, banana boy!";
+//        String testSentence = "Check if Palindrome method is working.";
+        String sentence = testSentence.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        Stack<Character> Palindrome = new Stack();
 
-        for (String sentence : Palindrome) {
-            System.out.format("%n" + sentence);
-            if (isPalindrome(sentence)) {
-                System.out.format("%nThis sentence is Palindrome%n");
-            } else {
-                System.out.format("%nThis sentence isn't Palindrome%n");
-            }
+        for (int i = 0; i < sentence.length(); i++) {
+            Palindrome.push(sentence.charAt(i));
         }
+
+        String reverseSentence = "";
+
+        while (!Palindrome.isEmpty()) {
+            reverseSentence = reverseSentence + Palindrome.pop();
+        }
+
+        if (sentence.equals(reverseSentence))
+            System.out.println("The sentence is a Palindrome.");
+        else
+            System.out.println("The sentence is not a Palindrome.");
 
     }
 
     public static void Queue() {
-        ArrayBlockingQueue<String> Palindrome = new ArrayBlockingQueue<String>(5);
-        Palindrome.add("Mom");
-        Palindrome.add("Was it a car or a cat I saw?");
-        Palindrome.add("Madam, in Eden, I’m Adam.");
-        Palindrome.add("Yo, banana boy!");
-        Palindrome.add("Check if Palindrome loop is working.");
+//        String testSentence = "Mom";
+//        String testSentence = "Was it a car or a cat I saw?";
+//        String testSentence = "Madam, in Eden, I’m Adam.";
+//        String testSentence = "Yo, banana boy!";
+        String testSentence = "Check if Palindrome method is working.";
+        String sentence = testSentence.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        ArrayBlockingQueue<Character> Palindrome = new ArrayBlockingQueue<Character>(sentence.length());
 
-        for (String sentence : Palindrome) {
-            System.out.format("%n" + sentence);
-            if (isPalindrome(sentence)) {
-                System.out.format("%nThis sentence is Palindrome%n");
-            } else {
-                System.out.format("%nThis sentence isn't Palindrome%n");
-            }
-        }
-    }
-
-    public static boolean isPalindrome(String sentence) {
-        String newSentence = sentence.replaceAll("[^a-zA-Z]", "").toLowerCase();
-        int i = 0, j = newSentence.length() - 1;
-        while (i < j) {
-            if (newSentence.charAt(i) != newSentence.charAt(j))
-                return false;
-            i++;
-            j--;
+        for (int i = sentence.length() - 1; i >= 0; i--) {
+            Palindrome.add(sentence.charAt(i));
         }
 
-        return true;
+        String reverseString = "";
+
+        while (!Palindrome.isEmpty()) {
+            reverseString = reverseString + Palindrome.remove();
+        }
+        if (sentence.equals(reverseString))
+            System.out.println("The sentence is a Palindrome.");
+        else
+            System.out.println("The sentence is not a Palindrome.");
 
     }
-
 
 }
+
+
